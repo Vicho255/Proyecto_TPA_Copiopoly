@@ -46,4 +46,4 @@ class Casilla_Zaun(Casilla):
     def __init__(self, pos, groups):
         super().__init__(pos, groups)
 
-        self.image = pg.image.load("d:\Proyecto_TPA\Graficos\rimworld-piel-432383-5500-1-07-011.png")
+        self.image = pg.image.load("d:\Proyecto_TPA\Graficos\rimworld-piel-432383-5500-1-07-011 .png")

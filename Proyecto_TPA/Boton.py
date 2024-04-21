@@ -15,6 +15,5 @@ class Boton(pg.sprite.Sprite):
         self.text_rect = self.text.get_rect(center=self.rect.center)
 
     def actualizar(self, pantalla):
-        # Dibujar el botón en la pantalla
         pantalla.blit(self.image, self.rect)
         pantalla.blit(self.text, self.text_rect)

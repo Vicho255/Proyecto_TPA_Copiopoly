@@ -8,7 +8,7 @@ class Reglas():
         
         self.screen = screen
         self.font = pg.font.Font(None, 36)
-        self.color_del_texto = (0,0,50)
+        self.color_del_texto = (0,0,50) #RGB
         self.color_fondo  = MONO
 
     def mostrar_texto(self,texto):

@@ -18,3 +18,8 @@ TABLERO =[['e','e','x','x','x','x','x','e','e'],
 
 MONO = (205,230,208)
 COLOR_1 = (50,50,200)
+ROJO = (255,0,0)
+
+#TEXTOS
+
+texto_reglas = "Aqui van las reglas de Juego"
