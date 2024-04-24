@@ -18,6 +18,7 @@ class Game():
 
         self.tablero = Tablero()
         self.reglas = Reglas(self.screen)
+        self.dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_1.png")
         
         self.iniciar_b = Boton(COLOR_1,ANCHO//2 - 100, 200, 200, 50, "Iniciar")
         self.salir_b = Boton(COLOR_1,ANCHO//2 - 100, 500, 200, 50, "Salir")
@@ -67,34 +68,22 @@ class Game():
                                 pos_ficha = self.tablero.pos_ficha()
                                 print(pos_ficha)
                                 resultado_dado = dado_fun()
+                                self.dado.dibujar(self.screen)
+                                self.dado.cambiar_imagen(resultado_dado, self.screen)
                                 print(resultado_dado)
-                                if resultado_dado == 1:
-                                    dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_1.png")
-                                    dado.dibujar(self.screen)
-                                elif resultado_dado == 2:
-                                    dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_2.png")
-                                    dado.dibujar(self.screen)
-                                elif resultado_dado == 3:
-                                    dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_3.png")
-                                    dado.dibujar(self.screen)
-                                elif resultado_dado == 4:
-                                    dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_4.png")
-                                    dado.dibujar(self.screen)
-                                elif resultado_dado == 5:
-                                    dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_5.png")
-                                    dado.dibujar(self.screen)
-                                elif resultado_dado == 6:
-                                    dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_6.png")
-                                    dado.dibujar(self.screen)
                                 for i in range(resultado_dado):
-                                    if pos_ficha == (592,592):
-                                        self.tablero.mover_ficha("izquierda")
-                                    elif pos_ficha == (80,592):
-                                        self.tablero.mover_ficha("arriba")
-                                    elif pos_ficha == (80,80):
-                                        self.tablero.mover_ficha("derecha")
-                                    elif pos_ficha == (592,80):
-                                        self.tablero.mover_ficha("abajo")
+                                    if (pos_ficha == (592,592) or 80 < pos_ficha[0] <= 592) and pos_ficha[1] == 592:
+                                        if pos_ficha[0] - (64 * resultado_dado) >= 80:
+                                            self.tablero.mover_ficha("izquierda")
+                                    elif (pos_ficha == (80,592) or 592 >= pos_ficha[1] > 80) and pos_ficha[0] == 80:
+                                        if pos_ficha[1] - (64 * resultado_dado) >= 80:
+                                            self.tablero.mover_ficha("arriba")
+                                    elif (pos_ficha == (80,80) or 80 <= pos_ficha[0] < 592) and pos_ficha[1] == 80:
+                                        if pos_ficha[0] + (64 * resultado_dado) <= 592:
+                                            self.tablero.mover_ficha("derecha")
+                                    elif (pos_ficha == (592,80) or 80 <= pos_ficha[1] < 592) and pos_ficha[0] == 592:
+                                        if pos_ficha[1] + (64 * resultado_dado) <= 592:
+                                            self.tablero.mover_ficha("abajo")
             
             if en_menu:
                 self.mostrar_menu()
@@ -118,6 +107,7 @@ class Game():
     def jugar(self):
         self.screen.fill(MONO)
         self.tablero.run()
+        self.dado.dibujar(self.screen)
         if self.mostrar_r:
             overlay = pg.Surface((ANCHO,ALTO), pg.SRCALPHA)
             overlay.fill((0, 0, 0, 100))
