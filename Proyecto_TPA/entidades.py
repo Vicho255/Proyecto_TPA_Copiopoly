@@ -33,11 +33,26 @@ class Jugador():
 
         }
 
-    def ganar_dinero():
-        pass
+    def ganar_dinero(self,cantidad):
 
-    def perder_dinero():
-        pass
+        self.dinero += cantidad
+        return self.dinero
 
-    def adquirir_propiedad():
-        pass
+    def perder_dinero(self,cantidad):
+
+        self.dinero -= cantidad
+        return self.dinero
+
+    def adquirir_propiedad(self,propiedad,precio):
+        if self.dinero >= precio:
+
+            respuesta = print(input(f"¿Desea adquirir {propiedad} por {precio}$ ?"))
+
+            if respuesta == "si":
+                self.Propiedades[propiedad] = precio
+
+                self.dinero -= precio
+            else: 
+                pass
+        else:
+            pass

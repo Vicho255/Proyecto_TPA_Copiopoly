@@ -1,5 +1,4 @@
 import pygame as pg
-from settings import *
 
 class Casilla(pg.sprite.Sprite):
 
@@ -7,7 +6,7 @@ class Casilla(pg.sprite.Sprite):
 
         super().__init__(groups)
 
-        self.image = pg.image.load('d:\Proyecto_TPA\Graficos\casilla.png')
+        self.image = pg.image.load('Graficos\casilla.png')
         self.rect = self.image.get_rect(topleft = pos)
 
 class Casilla_especial(pg.sprite.Sprite):
@@ -16,34 +15,40 @@ class Casilla_especial(pg.sprite.Sprite):
 
         super().__init__(groups)
 
-        self.image = pg.image.load('d:\Proyecto_TPA\Graficos\Casilla_especial.png')
+        self.image = pg.image.load('Graficos\Casilla_especial.png')
         self.rect = self.image.get_rect(topleft = pos)
 
+class Casilla_Suerte(Casilla):
+    
+    def __init__(self, pos, groups):
+        super().__init__(pos, groups)
+
+        self.image = pg.image.load('Graficos/Casilla_Suerte.png')
 
 class Casilla_Noxxuz(Casilla):
 
     def __init__(self, pos, groups):
         super().__init__(pos, groups)
 
-        self.image = pg.image.load("d:\Proyecto_TPA\Graficos\rimworld-piel-432383-5500-1-07-08.png")
+        self.image = pg.image.load("Graficos/Casilla_Noxxus.png")
 
 class Casilla_Demacia(Casilla):
 
     def __init__(self, pos, groups):
         super().__init__(pos, groups)
 
-        self.image = pg.image.load("d:\Proyecto_TPA\Graficos\rimworld-piel-432383-5500-1-07-010.png")
+        self.image = pg.image.load("Graficos/Casilla_Demacia.png")
 
 class Casilla_Jonia(Casilla):
 
     def __init__(self, pos, groups):
         super().__init__(pos, groups)
 
-        self.image = pg.image.load("d:\Proyecto_TPA\Graficos\rimworld-piel-432383-5500-1-07-09.png")
+        self.image = pg.image.load("Graficos/Casilla_Jonia.png")
 
 class Casilla_Zaun(Casilla):
 
     def __init__(self, pos, groups):
         super().__init__(pos, groups)
 
-        self.image = pg.image.load("d:\Proyecto_TPA\Graficos\rimworld-piel-432383-5500-1-07-011 .png")
+        self.image = pg.image.load("Graficos/Casilla_Zaund.png")
