@@ -30,7 +30,7 @@ class Casilla_Noxxuz(Casilla):
     def __init__(self, pos, groups):
         super().__init__(pos, groups)
 
-        self.image = pg.image.load("Graficos/Casilla_Noxxus.png")
+        self.image = pg.image.load("Graficos/Casilla_Noxus.png")
 
 class Casilla_Demacia(Casilla):
 

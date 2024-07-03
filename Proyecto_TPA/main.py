@@ -3,20 +3,18 @@ import sys
 from Utilidades.settings import *
 from debug import debug
 from tablero import *
-from Utilidades.Boton import Boton
 from Ventanas.reglas import Reglas
-from funciones import dado_fun
-from Utilidades.dado_img import Dado
 from Administrador import Administrador
 from Ventanas.menu import Menu
 from Ventanas.Juego import Juego
 
+ 
 
 class Game():
 
     def __init__(self):
         pg.init()
-
+ 
         self.screen = pg.display.set_mode((ANCHO,ALTO))
         pg.display.set_caption('Copiopoly')
         self.clock = pg.time.Clock()

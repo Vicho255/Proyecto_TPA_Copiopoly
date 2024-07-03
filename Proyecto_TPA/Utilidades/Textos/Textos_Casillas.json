@@ -1,0 +1,45 @@
+{
+    "Noxus":
+    {
+        "Noxus_1":
+        {
+            "Nombre" : "Bastion Imortal",
+            "Precio" : 100,
+            "Descripcion" : "El centro en todo sentido de la capital \ndel imperio Noxiano"
+        },
+        "Noxus_2":
+        {
+            "Nombre" : "Roza Negra",
+            "Precio" : 100,
+            "Descripcion" : "Cuartel de la mayor organizacion \nsecreta dentro del Imperio, destinada \na la creacion e investigacion de armas \nhumanas"
+        },
+        "Noxus_3":
+        {
+            "Nombre" : "Pozo",
+            "Precio" : 100,
+            "Descripcion" : "Una especie de coliceo dirigido por \n'Draven', donde se ven espectaculos de \nlo mas grotescos"
+        }
+    },
+
+    "Zaun":
+    {
+        "Zaun_1":
+        {
+            "Nombre" : "Respiradero",
+            "Precio" : 100,
+            "Descripcion" : ""
+        },
+        "Zaun_2":
+        {
+            "Nombre" : "Canales",
+            "Precio" : 100,
+            "Descripcion" : ""
+        },
+        "Zaun_3":
+        {
+            "Nombre" : "Nivel del Paceo",
+            "Precio" : 100,
+            "Descripcion" : "Parte de Zaun mas cercana a Piltover"
+        }
+    }
+}
