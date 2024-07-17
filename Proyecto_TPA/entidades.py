@@ -1,5 +1,4 @@
 import pygame as pg
-from funciones import *
 
 class Banca():
 
@@ -40,6 +39,12 @@ class Banca():
     def set_propiedades(self,propiedad):
         self.propiedades.pop(propiedad)
         return self.propiedades
+    
+    def obtener_proiedad(self, nombre):
+        for propiedad in self.propiedades:
+            if propiedad["Nombre"] == nombre:
+                return propiedad
+            return None
 
 class Jugador():
     
@@ -70,13 +75,5 @@ class Jugador():
         if self.dinero >= propiedad["precio"]:
             self.dinero -= propiedad["precio"]
             self.Propiedades.append(propiedad)
-            return True
-        return False
-
-hola = {"H":1,
-        "O":2,
-        "L":3,
-        "A":4}
-print(hola)
-hola.pop("O")
-print(hola)
+        else:
+            print("El jugador no tiene el dinero para comptrar la Propiedad")

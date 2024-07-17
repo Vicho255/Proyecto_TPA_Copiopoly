@@ -21,11 +21,13 @@ class Juego():
         self.pantalla = pantalla
         self.admin = administrador
 
+        self.Banca = Banca()
+
         self.tablero = Tablero()
         self.dado = Dado(imagen= "d:\Proyecto_TPA\Graficos\Dado\Dado_1.png")
         self.botonRegresar = Boton('Regresar', 40, (200, 50), posicion= (ANCHO//2 - 100, 400), metodo= self.cambiarEtapa, argumento= 'menu', texto_centrado= True)
         self.botonCambioBanca = Boton("Banca", 35, (150,45), posicion= (736,96),color = (0,100,200,255), color_colision='blue',metodo= self.volverBanca,texto_centrado= True)
-        self.botonComprar = Boton("Comprar", 35, (150,45), posicion= (750,580),color = (0,200,100,255),color_colision='green')
+        self.botonComprar = Boton("Comprar", 35, (150,45), posicion= (750,580),color = (0,200,100,255),color_colision='green', metodo=self.comprado, argumento= self.tablero.turnoSiguiente()[1])
         self.botonRechazar = Boton("Rechazar", 35, (150,45), posicion= (1020,580),color = (200,0,0,255), metodo= self.rechazado)
 
         self.teclas_presionado_espacio = False
@@ -47,8 +49,6 @@ class Juego():
         self.mostrar_rechazo = False
 
     def iniciar(self):
-        #print(pg.mouse.get_pos())
-        #print(self.mostrar_boton)
         self.pantalla.fill(MONO)
         self.tablero.run()
         self.dado.dibujar(self.pantalla)
@@ -78,7 +78,10 @@ class Juego():
             resultado = self.dado.lanzar()
             self.dado.cambiar_imagen(resultado, self.pantalla)
             self.tablero.mover_ficha(resultado_dado= resultado)
+            self.mostrar_Tex_Casilla = False
+            self.mostrar_Tex_Banca = True
             print(resultado)
+            self.posicion_tablero()
 
         elif not teclas[pg.K_SPACE]:
             self.teclas_presionado_espacio = False
@@ -109,43 +112,50 @@ class Juego():
         self.mostrar_boton = False
 
     def posicion_tablero(self):
+        
+
         for linea_index,linea in enumerate(TABLERO):
             for col_index, colum in enumerate(linea):
+                ficha = self.tablero.turnoSiguiente()[0]
                 x = col_index * TILESIDE
                 y = linea_index  * TILESIDE
 
-                ficha = self.tablero.turnoSiguiente()[0]
-
                 if self.tablero.pos_ficha(ficha) == (x+80,y+80) and colum == "n1":
                     self.texto_casilla.CambiarCadena(textos["Noxus"]["Noxus_1"]["Nombre"])
-                    self.info_Casilla.CambiarCadena(textos["Noxus"]["Noxus_1"]["Descripcion"])
+                    self.info_Casilla.CambiarCadena(textos["Noxus"]["Noxus_1"]["Precio"])
                     self.mostrar_Tex_Casilla = True
                     self.mostrar_Tex_Banca = False
+                    return textos["Noxus"]["Noxus_1"]["Nombre"]
                 elif self.tablero.pos_ficha(ficha) == (x+80,y+80) and colum == "n2":
                     self.texto_casilla.CambiarCadena(textos["Noxus"]["Noxus_2"]["Nombre"])
-                    self.info_Casilla.CambiarCadena(textos["Noxus"]["Noxus_2"]["Descripcion"])
+                    self.info_Casilla.CambiarCadena(textos["Noxus"]["Noxus_2"]["Precio"])
                     self.mostrar_Tex_Casilla = True
                     self.mostrar_Tex_Banca = False
+                    return textos["Noxus"]["Noxus_2"]["Nombre"]
                 elif self.tablero.pos_ficha(ficha) == (x+80,y+80) and colum == "n3":
                     self.texto_casilla.CambiarCadena(textos["Noxus"]["Noxus_3"]["Nombre"])
-                    self.info_Casilla.CambiarCadena(textos["Noxus"]["Noxus_3"]["Descripcion"])
+                    self.info_Casilla.CambiarCadena(textos["Noxus"]["Noxus_3"]["Precio"])
                     self.mostrar_Tex_Casilla = True
                     self.mostrar_Tex_Banca = False
+                    return textos["Noxus"]["Noxus_3"]["Nombre"]
                 elif self.tablero.pos_ficha(ficha) == (x+80, y+80) and colum == "d":
                     self.texto_casilla.CambiarCadena(texto_demacia)
                     self.info_Casilla.CambiarCadena(texto_demacia)
                     self.mostrar_Tex_Casilla = True
                     self.mostrar_Tex_Banca = False
+                    return colum
                 elif self.tablero.pos_ficha(ficha) == (x+80, y+80) and colum == "j":
                     self.texto_casilla.CambiarCadena(texto_jonia)
                     self.info_Casilla.CambiarCadena(texto_jonia)
                     self.mostrar_Tex_Casilla = True
                     self.mostrar_Tex_Banca = False
+                    return colum
                 elif self.tablero.pos_ficha(ficha) == (x+80, y+80) and colum == "z":
                     self.texto_casilla.CambiarCadena(texto_zaund)
                     self.info_Casilla.CambiarCadena(texto_zaund)
                     self.mostrar_Tex_Casilla = True
                     self.mostrar_Tex_Banca = False
+                    return colum
 
     def volverBanca(self):
         self.mostrar_Tex_Casilla = False
@@ -155,11 +165,20 @@ class Juego():
         self.admin.set_etapa(etapa)
 
     def comprado(self, jugador):
-        propiedad = self.posicion_tablero()
-        j = self.tablero.jugadores[jugador.nombre]
-        b = self.tablero.banco
-        j.adquirir_propiedad(propiedad)
-        b.set_propiedades(propiedad)
+        ficha = self.tablero.turnoSiguiente()[0]
+        x, y = self.tablero.pos_ficha(ficha)
+        col = (x - 80) // TILESIDE
+        row = (y - 80) // TILESIDE
+        casilla_nombre = TABLERO[row][col]
+        
+        propiedad = self.Banca.obtener_proiedad(casilla_nombre)
+        if propiedad:
+            self.banca.perder_dinero_banca(propiedad["precio"])
+            self.banca.set_propiedades(self.banca.propiedades.index(propiedad))
+            self.mostrar_compra = False
+            print(f"{jugador.nombre} compró {propiedad['Nombre']} por {propiedad['precio']}")
+        else:
+            print(f"{jugador.nombre} no tiene suficiente dinero para comprar {casilla_nombre}")
 
         self.mostrar_compra = True
 

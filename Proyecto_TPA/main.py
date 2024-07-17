@@ -8,8 +8,6 @@ from Administrador import Administrador
 from Ventanas.menu import Menu
 from Ventanas.Juego import Juego
 
- 
-
 class Game():
 
     def __init__(self):
@@ -17,7 +15,7 @@ class Game():
  
         self.screen = pg.display.set_mode((ANCHO,ALTO))
         pg.display.set_caption('Copiopoly')
-        self.clock = pg.time.Clock()
+        self.clock = pg.time.Clock() 
 
         self.administradorJuego = Administrador('menu')
         self.reglas = Reglas(self.screen, self.administradorJuego)
@@ -34,7 +32,7 @@ class Game():
         while True:
 
             for evento in pg.event.get():
-                if evento.type == pg.QUIT:
+                if evento.type == pg.QUIT:    
                     pg.quit()
                     sys.exit()
 
